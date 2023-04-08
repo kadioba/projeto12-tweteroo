@@ -29,11 +29,14 @@ app.post("/tweets", (req, res) => {
 
 app.get("/tweets", (req, res) => {
     const ultimosTweets = [];
-    for (let i = (tweets.length - 1); i--; i >= (tweets.length - 10)) {
-        const tweetTemp = tweets[i];
-        const userTweet = usuarios.find(user => user.username === tweetTemp.username)
-        tweetTemp.avatar = userTweet.avatar;
-        ultimosTweets.push(tweetTemp);
+    for (let i = (tweets.length - 1); i >= (tweets.length - 10); i--) {
+        if (tweets[i] !== undefined) {
+            const tweetTemp = tweets[i];
+            const userTweet = usuarios.find(user => user.username === tweetTemp.username)
+            tweetTemp.avatar = userTweet.avatar;
+            console.log(tweetTemp)
+            ultimosTweets.push(tweetTemp);
+        }
     }
     res.send(ultimosTweets)
 })

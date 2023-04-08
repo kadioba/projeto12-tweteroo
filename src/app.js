@@ -35,7 +35,7 @@ app.get("/tweets", (req, res) => {
         tweetTemp.avatar = userTweet.avatar;
         ultimosTweets.push(tweetTemp);
     }
-    res.send("OK")
+    res.send(ultimosTweets)
 })
 
 app.listen(5000);

@@ -9,6 +9,14 @@ app.use(express.json());
 
 app.post("/sign-up", (req, res) => {
     const { username, avatar } = req.body;
+    if (!username || username === "" || typeof username != "string") {
+        res.sendStatus(400);
+        return;
+    }
+    if (!avatar || avatar === "" || typeof avatar != "string") {
+        res.sendStatus(400);
+        return;
+    }
     usuarios.push({ username, avatar });
     res.send("OK")
     console.log(usuarios)

@@ -18,7 +18,7 @@ app.post("/sign-up", (req, res) => {
         return;
     }
     usuarios.push({ username, avatar });
-    res.send("OK")
+    res.status(201).send("OK")
     console.log(usuarios)
 })
 
@@ -27,7 +27,7 @@ app.post("/tweets", (req, res) => {
     const { username, tweet } = req.body;
     const userCadastrado = usuarios.find(usuario => usuario.username === username);
     if (!userCadastrado) {
-        res.send("UNAUTHORIZED");
+        res.status(401).send("UNAUTHORIZED");
         return;
     }
     if (!tweet || tweet === "" || typeof tweet != "string") {
@@ -35,7 +35,7 @@ app.post("/tweets", (req, res) => {
         return;
     }
     tweets.push({ username, tweet });
-    res.send("OK")
+    res.status(201).send("OK")
     console.log(tweets)
 })
 

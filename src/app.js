@@ -24,8 +24,9 @@ app.post("/sign-up", (req, res) => {
 
 app.post("/tweets", (req, res) => {
     console.log(tweets)
-    const { username, tweet } = req.body;
-    const userCadastrado = usuarios.find(usuario => usuario.username === username);
+    const { tweet } = req.body;
+    const { user } = req.headers;
+    const userCadastrado = usuarios.find(usuario => usuario.username === user);
     if (!userCadastrado) {
         res.status(401).send("UNAUTHORIZED");
         return;

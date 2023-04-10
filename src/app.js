@@ -30,6 +30,10 @@ app.post("/tweets", (req, res) => {
         res.send("UNAUTHORIZED");
         return;
     }
+    if (!tweet || tweet === "" || typeof tweet != "string") {
+        res.sendStatus(400);
+        return;
+    }
     tweets.push({ username, tweet });
     res.send("OK")
     console.log(tweets)

@@ -41,7 +41,11 @@ app.post("/tweets", (req, res) => {
 
 app.get("/tweets", (req, res) => {
     const ultimosTweets = [];
-    for (let i = (tweets.length - 1); i >= (tweets.length - 10); i--) {
+    const pagina = Number(req.query.page)
+    if (pagina < 1) {
+        res.status(400).send("Informe uma página válida!")
+    }
+    for (let i = (tweets.length - 1) - (10 * (pagina - 1)); i >= (tweets.length - 10) - (10 * (pagina - 1)); i--) {
         if (tweets[i] !== undefined) {
             const tweetTemp = tweets[i];
             const userTweet = usuarios.find(user => user.username === tweetTemp.username)

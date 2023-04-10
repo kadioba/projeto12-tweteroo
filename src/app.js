@@ -24,10 +24,8 @@ app.post("/sign-up", (req, res) => {
 
 app.post("/tweets", (req, res) => {
     console.log(tweets)
-    const { tweet } = req.body;
-    const { user } = req.headers;
-    console.log(user)
-    const userCadastrado = usuarios.find(usuario => usuario.username === user);
+    const { username, tweet } = req.body;
+    const userCadastrado = usuarios.find(usuario => usuario.username === username);
     if (!userCadastrado) {
         res.status(401).send("UNAUTHORIZED");
         return;
@@ -36,7 +34,7 @@ app.post("/tweets", (req, res) => {
         res.sendStatus(400);
         return;
     }
-    tweets.push({ user, tweet });
+    tweets.push({ username, tweet });
     res.status(201).send("OK")
     console.log(tweets)
 })

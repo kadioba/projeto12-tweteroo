@@ -26,6 +26,7 @@ app.post("/tweets", (req, res) => {
     console.log(tweets)
     const { tweet } = req.body;
     const { user } = req.headers;
+    console.log(user)
     const userCadastrado = usuarios.find(usuario => usuario.username === user);
     if (!userCadastrado) {
         res.status(401).send("UNAUTHORIZED");
@@ -35,7 +36,7 @@ app.post("/tweets", (req, res) => {
         res.sendStatus(400);
         return;
     }
-    tweets.push({ username, tweet });
+    tweets.push({ user, tweet });
     res.status(201).send("OK")
     console.log(tweets)
 })
